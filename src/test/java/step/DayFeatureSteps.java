@@ -1,6 +1,7 @@
 package step;
 
 import aoc.Day;
+import aoc.Input;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -31,7 +32,7 @@ public class DayFeatureSteps {
 
     @Then("check that the input for the number exists")
     public void checkThatTheInputForTheNumberExists() {
-        assertNotNull(getSystemResource(INPUT_PATH + day));
+        assertNotNull(Input.of(day));
     }
 
     @And("check that the solution has been provided")
@@ -41,7 +42,7 @@ public class DayFeatureSteps {
 
     @And("check that the solution provider has been implemented")
     public void checkThatTheSolutionProviderHasBeenImplemented() throws ReflectiveOperationException {
-        implementation = (Day) Class.forName("Day" + day).getConstructor().newInstance();
+        implementation = (Day) Class.forName("solution.Day" + day).getConstructor().newInstance();
     }
 
     @And("check that the solutions provided is correct")
