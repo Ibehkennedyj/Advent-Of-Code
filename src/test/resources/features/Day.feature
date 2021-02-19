@@ -8,3 +8,10 @@ Feature: DayFeature
     And check that the solution has been provided
     And check that the solution provider has been implemented
     And check that the solutions provided is correct
+
+  Scenario: Day 1 with multiple test with same answer
+    When I provide a number 1
+    And provide inputs
+      | ()()  |
+      | (())  |
+    Then check that the solution is '0'
