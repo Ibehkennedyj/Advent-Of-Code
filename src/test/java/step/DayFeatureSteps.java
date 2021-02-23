@@ -41,12 +41,17 @@ public class DayFeatureSteps {
 
     @And("load the solution implementation")
     public void checkThatTheSolutionProviderHasBeenImplemented() throws ReflectiveOperationException {
-        implementation = (Day) Class.forName("solution.Day" + day).getConstructor().newInstance();
+        implementation = (Day) Class.forName("solution._2015.Day" + day).getConstructor().newInstance();
     }
 
     @And("check that the solutions provided is correct")
     public void checkThatTheSolutionProvidedIsCorrect() {
         ofNullable(implementation.getSolution1(input)).ifPresent(solution -> assertEquals(solution, solutions.get(0)));
         ofNullable(implementation.getSolution2(input)).ifPresent(solution -> assertEquals(solution, solutions.get(1)));
+    }
+
+    @And("^confirm that ([^\"]*) will return ([^\"]*)$")
+    public void confirmThatInputWillReturnOutput(String input, String answer) {
+        assertEquals(answer, implementation.getSolution1(input));
     }
 }
