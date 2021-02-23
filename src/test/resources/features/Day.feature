@@ -12,6 +12,7 @@ Feature: DayFeature
   Scenario: Day 1 with multiple test with same answer
     When I provide a number 1
     And provide inputs
+      | input |
       | ()()  |
       | (())  |
     Then check that the solution is '0'
