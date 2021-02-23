@@ -3,15 +3,13 @@ package step;
 import aoc.Day;
 import aoc.Input;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 
 import java.io.IOException;
 import java.util.List;
 
-import static aoc.Constants.INPUT_PATH;
 import static aoc.Constants.SOLUTION_PATH;
-import static java.lang.ClassLoader.getSystemResource;
 import static java.nio.file.Files.readAllLines;
 import static java.nio.file.Path.of;
 import static java.util.Optional.ofNullable;
@@ -22,32 +20,33 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class DayFeatureSteps {
 
     int day;
+    String input;
     Day implementation;
     List<String> solutions;
 
-    @When("I provide a number {int}")
+    @Given("I set the active day as {int}")
     public void iProvideANumber(int day) {
         this.day = day;
     }
 
-    @Then("check that the input for the number exists")
-    public void checkThatTheInputForTheNumberExists() {
-        assertNotNull(Input.of(day));
+    @Then("load the input")
+    public void checkThatTheInputForTheNumberExists() throws IOException {
+        input = Input.of(day);
     }
 
-    @And("check that the solution has been provided")
+    @And("load the solutions")
     public void checkThatTheSolutionHasBeenProvided() throws IOException {
         solutions = readAllLines(of(SOLUTION_PATH + day));
     }
 
-    @And("check that the solution provider has been implemented")
+    @And("load the solution implementation")
     public void checkThatTheSolutionProviderHasBeenImplemented() throws ReflectiveOperationException {
         implementation = (Day) Class.forName("solution.Day" + day).getConstructor().newInstance();
     }
 
     @And("check that the solutions provided is correct")
     public void checkThatTheSolutionProvidedIsCorrect() {
-        ofNullable(implementation.getSolution1()).ifPresent(solution -> assertEquals(solution, solutions.get(0)));
-        ofNullable(implementation.getSolution2()).ifPresent(solution -> assertEquals(solution, solutions.get(1)));
+        ofNullable(implementation.getSolution1(input)).ifPresent(solution -> assertEquals(solution, solutions.get(0)));
+        ofNullable(implementation.getSolution2(input)).ifPresent(solution -> assertEquals(solution, solutions.get(1)));
     }
 }
