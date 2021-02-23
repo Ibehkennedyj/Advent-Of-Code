@@ -1,25 +1,24 @@
 package solution._2015;
 
-import aoc.Solution;
+import aoc.Day;
 
 import static java.lang.String.valueOf;
 
-public class Day1 extends Solution {
+public class Day1 implements Day {
 
     public Day1() {
-        super(1);
+        super();
     }
 
     @Override
-    public String getSolution1() {
-        var input = getInputs().get(0);
+    public String getSolution1(String input) {
         var leftBracket = input.replaceAll("\\)", "").length();
         var rightBracket = input.replaceAll("\\(", "").length();
         return valueOf(leftBracket - rightBracket);
     }
 
     @Override
-    public String getSolution2() {
+    public String getSolution2(String input) {
         return null;
     }
 }
