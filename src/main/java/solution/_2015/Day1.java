@@ -6,10 +6,6 @@ import static java.lang.String.valueOf;
 
 public class Day1 implements Day {
 
-    public Day1() {
-        super();
-    }
-
     @Override
     public String getSolution1(String input) {
         var leftBracket = input.replaceAll("\\)", "").length();
@@ -19,6 +15,13 @@ public class Day1 implements Day {
 
     @Override
     public String getSolution2(String input) {
+        int level = 0;
+        for (int i = 0; i < input.length(); ) {
+            level += (input.charAt(i++) == ')') ? -1 : 1;
+            if (level == -1) {
+                return valueOf(i);
+            }
+        }
         return null;
     }
 }
