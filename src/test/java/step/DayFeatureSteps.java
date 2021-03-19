@@ -9,12 +9,11 @@ import io.cucumber.java.en.Then;
 import java.io.IOException;
 import java.util.List;
 
-import static aoc.Constants.SOLUTION_PATH;
+import static aoc.Properties.SOLUTION_PATH;
 import static java.nio.file.Files.readAllLines;
 import static java.nio.file.Path.of;
 import static java.util.Optional.ofNullable;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 public class DayFeatureSteps {
