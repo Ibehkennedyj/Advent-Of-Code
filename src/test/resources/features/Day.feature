@@ -4,6 +4,7 @@ Feature: DayFeature
 
   Scenario: Day 0
     Given I set the active day as 0
+    Then process properties
     Then load the input
     And load the solutions
     And load the solution implementation
@@ -11,6 +12,7 @@ Feature: DayFeature
 
   Scenario Outline: Day 1 with different input and different answers
     Given I set the active day as 1
+    Given I set the active year as 2015
     Then load the solution implementation
     And confirm that <input> will return <answer>
     Examples:
